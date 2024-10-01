@@ -1,0 +1,55 @@
+'use client'
+import React, { useState } from 'react'
+import FormSectionComp from '../_components/FormSectionComp'
+import OutputSectionComp from '../_components/OutputSectionComp'
+import templates from '@/app/(data)/templates'
+import { TEMPLATE } from '../../_components/TemplateList'
+import { Button } from '@/components/ui/button'
+import { ArrowLeft } from 'lucide-react'
+import Link from 'next/link'
+import { chatSession } from '@/app/utils/AiModel'
+
+interface PROPS{
+    params:{
+        'template-slug':string
+    }
+}
+function NewContent(props:PROPS) {
+
+  const selectedTemplate:TEMPLATE|undefined=templates?.find(item=>item.slug==props.params['template-slug']);
+  const[loading,setLoading]=useState(false);
+  const[aiOutput,setAioutput]=useState<string>('');
+
+
+    const generateAIContent=async (formData:any)=>{
+        setLoading(true);
+         const selectedPrompt=selectedTemplate?.aiPrompt;
+         const finalAiPrompt=JSON.stringify(formData)+","+selectedPrompt;
+         const result=await chatSession.sendMessage(finalAiPrompt);
+         const finalResult=(result?.response?.candidates[0]?.content?.parts[0]?.text);
+         setAioutput(finalResult);
+         console.log(finalResult);
+         setLoading(false);
+    }
+
+  return (
+    <div className='p-7'>
+        <Link href={'/dashboard'}>
+        <Button><ArrowLeft/>Back</Button>
+        </Link>
+        <div className='grid grid-cols-1 md:grid-cols-3 gap-5 py-2 '>
+        <FormSectionComp loading={loading} selectedTemplate={selectedTemplate}
+        userFormInput={(v:any)=>generateAIContent(v)}/>
+        <div className='col-span-2'>
+        <OutputSectionComp aiOutput={aiOutput}/>
+        </div>
+        
+      
+    </div>
+    </div>
+    
+  )
+}
+
+export default NewContent
+
