@@ -1,6 +1,76 @@
 
 export default  [
     {
+        name: 'Write Code',
+        desc: 'AI Model to generate programming code in any language',
+        icon:'https://cdn-icons-png.flaticon.com/128/6062/6062646.png',
+        category: 'Coding',
+       
+        slug: 'write-code',
+        aiPrompt: 'Depends on user codeDescription write a code and give output in  in rich text editor format in code block ',
+        form: [
+            {
+                label: 'Enter description of code you want along with Programming Lang',
+                field: 'textarea',
+                name: 'codeDesscripton',
+                required:true
+            },
+           
+        ]
+    },
+    {
+        name: 'Explain Code',
+        desc: 'AI Model to explain programming code in any language',
+        icon:'https://cdn-icons-png.flaticon.com/128/8488/8488751.png',
+        category: 'Coding',
+       
+        slug: 'explain-code',
+        aiPrompt: 'Depends on user codeDescription explain code line by line and give output in  in rich text editor format in code block ',
+        form: [
+            {
+                label: 'Enter code which you want to understand',
+                field: 'textarea',
+                name: 'codeDesscripton',
+                required:true
+            },
+           
+        ]
+    },
+    {
+        name: 'Code Bug Detector',
+        desc: 'This tool analyzes your input, like error messages and code snippets, to pinpoint and fix bugs, offering detailed solutions and alternatives in a straightforward, user-friendly way.',
+        icon:'https://cdn-icons-png.flaticon.com/128/4426/4426267.png',
+        category: 'code-bug-detector',
+       
+        slug: 'code-bug-detector',
+        aiPrompt: 'Depends on user codeInput find bug in code and give solution and give output in  in rich text editor format in code block ',
+        form: [
+            {
+                label: 'Enter code which you want to test bug',
+                field: 'textarea',
+                name: 'codeInput',
+                required:true
+            },
+           
+        ]
+    },
+    {
+        name: 'Rewrite Article (Plagiarism Free)',
+        desc: 'Use this tool to rewrite existing Article or Blog Post which can bypass AI detectors and also make it plagiarism free.',
+        icon: 'https://cdn-icons-png.flaticon.com/128/3131/3131607.png',
+        category: 'Rewriting Tool',
+        slug: 'rewrite-article',
+        aiPrompt: 'Rewrite give article without any Plagiarism in rich text editor format',
+        form: [
+            {
+                label: '🤖 Provide your Article/Blogpost or any other content to rewrite.',
+                field: 'textarea',
+                name: 'article',
+                required:true
+            }
+        ]
+    },
+    {
         name:'Blog Title',
         desc:'An AI tool that generate blog title depends on yout blog information',
         category:'Blog',
@@ -127,22 +197,7 @@ export default  [
         ]
     },
 
-    {
-        name: 'Rewrite Article (Plagiarism Free)',
-        desc: 'Use this tool to rewrite existing Article or Blog Post which can bypass AI detectors and also make it plagiarism free.',
-        icon: 'https://cdn-icons-png.flaticon.com/128/3131/3131607.png',
-        category: 'Rewriting Tool',
-        slug: 'rewrite-article',
-        aiPrompt: 'Rewrite give article without any Plagiarism in rich text editor format',
-        form: [
-            {
-                label: '🤖 Provide your Article/Blogpost or any other content to rewrite.',
-                field: 'textarea',
-                name: 'article',
-                required:true
-            }
-        ]
-    },
+   
     {
         name: 'Text Improver',
         desc: 'This handy tool refines your writing, eliminating errors and redundancies for a clear, readable result. It also offers a comprehensive tone analysis and suggests better word choices.',
@@ -246,60 +301,7 @@ export default  [
            
         ]
     },
-    {
-        name: 'Write Code',
-        desc: 'AI Model to generate programming code in any language',
-        icon:'https://cdn-icons-png.flaticon.com/128/6062/6062646.png',
-        category: 'Coding',
-       
-        slug: 'write-code',
-        aiPrompt: 'Depends on user codeDescription write a code and give output in  in rich text editor format in code block ',
-        form: [
-            {
-                label: 'Enter description of code you want along with Programming Lang',
-                field: 'textarea',
-                name: 'codeDesscripton',
-                required:true
-            },
-           
-        ]
-    },
-    {
-        name: 'Explain Code',
-        desc: 'AI Model to explain programming code in any language',
-        icon:'https://cdn-icons-png.flaticon.com/128/8488/8488751.png',
-        category: 'Coding',
-       
-        slug: 'explain-code',
-        aiPrompt: 'Depends on user codeDescription explain code line by line and give output in  in rich text editor format in code block ',
-        form: [
-            {
-                label: 'Enter code which you want to understand',
-                field: 'textarea',
-                name: 'codeDesscripton',
-                required:true
-            },
-           
-        ]
-    },
-    {
-        name: 'Code Bug Detector',
-        desc: 'This tool analyzes your input, like error messages and code snippets, to pinpoint and fix bugs, offering detailed solutions and alternatives in a straightforward, user-friendly way.',
-        icon:'https://cdn-icons-png.flaticon.com/128/4426/4426267.png',
-        category: 'code-bug-detector',
-       
-        slug: 'code-bug-detector',
-        aiPrompt: 'Depends on user codeInput find bug in code and give solution and give output in  in rich text editor format in code block ',
-        form: [
-            {
-                label: 'Enter code which you want to test bug',
-                field: 'textarea',
-                name: 'codeInput',
-                required:true
-            },
-           
-        ]
-    },
+    
     {
         name: 'Tagline Generator',
         desc: 'Struggling to find the perfect tagline for your brand? Let our AI-tool assist you in creating a tagline that stands out.',

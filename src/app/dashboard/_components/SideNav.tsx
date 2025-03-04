@@ -3,6 +3,7 @@ import React, { useEffect } from 'react'
 import Image from 'next/image'
 import { FileClock, Home, Settings } from 'lucide-react'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 function SideNav() {
 
     const path=usePathname();
@@ -19,7 +20,7 @@ function SideNav() {
         {
         name:'History',
         icon:FileClock,
-        path:'/dashboard/history',
+        path:'/dashboard/History',
         },
         {
         name:'Setting',
@@ -38,13 +39,17 @@ function SideNav() {
         <hr className='my-3 border '/>
 
         <div className='mt-10'>
-            {menulist.map((menu,index)=>(
-                <div className={`flex gap-2 mb-2 p-3
-                hover:bg-primary hover:text-white rounded-lg cursor-pointer  
-                ${path==menu.path&&'bg-primary text-white'}`}>
-                    <menu.icon className='h-6 w-6'/>
-                    <h2>{menu.name}</h2>
-                </div>
+        {menulist.map((menu,index)=>(
+                <Link href={menu.path}>
+                    <div className={`flex gap-2 mb-2 p-3
+                    hover:bg-primary hover:text-white rounded-lg
+                    cursor-pointer items-center
+                    ${path==menu.path&&'bg-primary text-white'}
+                    `}>
+                        <menu.icon className='h-6 w-6'/>
+                        <h2 className='text-lg'>{menu.name}</h2>
+                    </div>
+                </Link>
             ))}
         </div>
     </div>
