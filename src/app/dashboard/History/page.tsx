@@ -10,7 +10,7 @@ import { TEMPLATE } from "../_components/TemplateList";
 import CopyButton from "./_components/CopyButton";
 
 export interface HISTORY {
-  formData: string|null;
+  formData: string | null;
   aiResponse: string;
   templateSlug: string;
   createdBy: string;
