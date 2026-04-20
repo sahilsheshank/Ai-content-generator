@@ -1,322 +1,194 @@
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
-import page from "./dashboard/page";
 import Link from "next/link";
+import { ArrowRight, Sparkles, Zap, Shield, Clock, Star, ChevronRight } from "lucide-react";
+
+const features = [
+  {
+    icon: Sparkles,
+    title: "25+ AI Templates",
+    desc: "From blog posts to code generation — every use case covered out of the box.",
+    color: "text-violet-500",
+    bg: "bg-violet-500/10",
+  },
+  {
+    icon: Zap,
+    title: "Instant Results",
+    desc: "Powered by Gemini 2.0 Flash. Generate high-quality content in seconds.",
+    color: "text-indigo-500",
+    bg: "bg-indigo-500/10",
+  },
+  {
+    icon: Shield,
+    title: "Safe & Secure",
+    desc: "Your data stays private. No content is stored without your permission.",
+    color: "text-blue-500",
+    bg: "bg-blue-500/10",
+  },
+  {
+    icon: Clock,
+    title: "Full History",
+    desc: "Every generation is saved. Search, copy and reuse past outputs anytime.",
+    color: "text-pink-500",
+    bg: "bg-pink-500/10",
+  },
+];
+
+const stats = [
+  { value: "25+", label: "Templates" },
+  { value: "10x", label: "Faster Writing" },
+  { value: "100%", label: "AI Powered" },
+  { value: "Free", label: "To Start" },
+];
 
 export default function Home() {
   return (
-    <div>
-      <header className="flex flex-wrap sm:justify-start sm:flex-nowrap z-50 w-full bg-white border-b border-gray-200 text-sm py-3 sm:py-0 dark:bg-neutral-800 dark:border-neutral-700">
-        <nav
-          className="relative max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between sm:px-6 lg:px-8"
-          aria-label="Global"
-        >
-          <div className="flex items-center justify-between">
-            {/* <a className="flex-none text-xl font-semibold dark:text-white" href="#" aria-label="Brand">Brand</a> */}
-            <div className="flex gap-2 justify-center items-center">
-              {/* <button type="button" className="hs-collapse-toggle size-9 flex justify-center items-center text-sm font-semibold rounded-lg border border-gray-200 text-gray-800 hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none dark:text-white dark:border-neutral-700 dark:hover:bg-neutral-700" data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation" aria-label="Toggle navigation"> */}
-              <Image src={"/logo.svg"} alt="logo" width={80} height={80} />
-              <h2 className="text-[#17CF97] text-3xl font-bold  min-w-max">
-                Handy AI
-              </h2>
-              {/* </button> */}
-            </div>
+    <div className="min-h-screen bg-background text-foreground">
+      {/* ── Navbar ── */}
+      <header className="sticky top-0 z-50 border-b border-border/60 bg-background/80 backdrop-blur-md">
+        <nav className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <Image src="/logo.svg" alt="logo" width={36} height={36} />
+            <span className="text-xl font-bold gradient-text">Handy AI</span>
           </div>
-          <div
-            id="navbar-collapse-with-animation"
-            className="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block"
-          >
-            <div className="flex flex-col sm:flex-row sm:items-center sm:justify-end sm:ps-7">
-              <Link
-                href="/sign-in"
-                className="flex items-center gap-x-2 font-medium text-gray-500 hover:text-blue-600 sm:border-s sm:border-gray-300 py-2 sm:py-0 sm:ms-4 sm:my-6 sm:ps-6 dark:border-neutral-700 dark:text-neutral-400 dark:hover:text-blue-500"
-              >
-                <svg
-                  className="flex-shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="16"
-                  height="16"
-                  fill="currentColor"
-                  viewBox="0 0 16 16"
-                >
-                  <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
-                </svg>
-                Get Started
-              </Link>
-            </div>
+          <div className="flex items-center gap-3">
+            <Link
+              href="/sign-in"
+              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Sign in
+            </Link>
+            <Link
+              href="/sign-up"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold bg-primary text-primary-foreground px-4 py-2 rounded-xl hover:opacity-90 transition-opacity"
+            >
+              Get started <ArrowRight className="w-3.5 h-3.5" />
+            </Link>
           </div>
         </nav>
       </header>
-      <div className="relative overflow-hidden before:absolute before:top-0 before:start-1/2 before:bg-[url('https://preline.co/assets/svg/examples/polygon-bg-element.svg')] dark:before:bg-[url('https://preline.co/assets/svg/examples-dark/polygon-bg-element.svg')] before:bg-no-repeat before:bg-top before:bg-cover before:size-full before:-z-[1] before:transform before:-translate-x-1/2">
-        <div className="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8 pt-24 pb-10">
-          <div className="flex justify-center">
-            <a
-              className="inline-flex items-center gap-x-2 bg-white border border-gray-200 text-sm text-gray-800 p-1 ps-3 rounded-full transition hover:border-gray-300 dark:bg-neutral-800 dark:border-neutral-700 dark:hover:border-neutral-600 dark:text-neutral-200"
-              href="https://www.linkedin.com/in/sahil-sheshank-203557255/"
-              target="_blank"
+
+      {/* ── Hero ── */}
+      <section className="relative overflow-hidden pt-24 pb-20">
+        {/* Background blobs */}
+        <div className="absolute inset-0 -z-10 overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-[600px] h-[600px] rounded-full bg-violet-600/10 blur-3xl" />
+          <div className="absolute -bottom-40 -left-40 w-[600px] h-[600px] rounded-full bg-indigo-600/10 blur-3xl" />
+        </div>
+
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-xs font-semibold px-3 py-1.5 rounded-full mb-6 border border-primary/20">
+            <Sparkles className="w-3.5 h-3.5" />
+            Powered by Gemini 2.0 Flash
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight leading-[1.1] mb-6">
+            Create Better Content{" "}
+            <span className="gradient-text">10x Faster</span>
+          </h1>
+
+          <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed">
+            Stop staring at a blank page. Handy AI uses advanced AI to generate
+            blog posts, social captions, code, emails and more — in seconds.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-3 justify-center mb-16">
+            <Link
+              href="/sign-up"
+              className="inline-flex items-center justify-center gap-2 bg-primary text-primary-foreground font-semibold px-8 py-4 rounded-xl hover:opacity-90 transition-all glow text-base"
             >
-              Connect with me now
-              <span className="py-1.5 px-2.5 inline-flex justify-center items-center gap-x-2 rounded-full bg-gray-200 font-semibold text-sm text-gray-600 dark:bg-neutral-700 dark:text-neutral-400">
-                <svg
-                  className="flex-shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </span>
-            </a>
+              Start for free <ArrowRight className="w-4 h-4" />
+            </Link>
+            <Link
+              href="/sign-in"
+              className="inline-flex items-center justify-center gap-2 border border-border bg-background text-foreground font-semibold px-8 py-4 rounded-xl hover:bg-muted transition-all text-base"
+            >
+              Sign in
+            </Link>
           </div>
 
-          <div className="mt-5 max-w-2xl text-center mx-auto">
-            <h1 className="block font-bold text-gray-800 text-4xl md:text-5xl lg:text-6xl dark:text-neutral-200">
-              AI Content
-              <span className="bg-clip-text bg-gradient-to-tl from-blue-600 to-violet-600 text-transparent">
-                {" "}
-                Generator
-              </span>
-            </h1>
+          {/* Stats row */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-2xl mx-auto">
+            {stats.map((s) => (
+              <div
+                key={s.label}
+                className="glass-card rounded-2xl p-4 text-center"
+              >
+                <div className="text-2xl font-extrabold gradient-text">{s.value}</div>
+                <div className="text-xs text-muted-foreground mt-1">{s.label}</div>
+              </div>
+            ))}
           </div>
+        </div>
+      </section>
 
-          <div className="mt-5 max-w-3xl text-center mx-auto">
-            <p className="text-lg text-gray-600 dark:text-neutral-400">
-              Revolutionize your content creation with our AI-powered app,
-              delivering engaging and high-quality text in seconds.
+      {/* ── Features ── */}
+      <section className="py-20 bg-muted/30">
+        <div className="max-w-5xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-bold mb-3">
+              Everything you need to{" "}
+              <span className="gradient-text">write faster</span>
+            </h2>
+            <p className="text-muted-foreground text-lg">
+              One tool. Every content type. Zero writer's block.
             </p>
           </div>
 
-          <div className="mt-8 gap-3 flex justify-center">
-            <a
-              className="inline-flex justify-center items-center 
-      gap-x-3 text-center bg-gradient-to-tl from-blue-600
-       to-violet-600 hover:from-violet-600 hover:to-blue-600 border border-transparent text-white text-sm font-medium rounded-md focus:outline-none focus:ring-1 focus:ring-gray-600 py-3 px-4 dark:focus:ring-offset-gray-800"
-              href="/sign-in"
-            >
-              Get started
-              <svg
-                className="flex-shrink-0 size-4"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            {features.map((f) => (
+              <div
+                key={f.title}
+                className="bg-card border border-border rounded-2xl p-6 hover:shadow-lg hover:-translate-y-1 transition-all duration-300 group"
               >
-                <path d="m9 18 6-6-6-6" />
-              </svg>
-            </a>
+                <div className={`inline-flex p-3 rounded-xl ${f.bg} mb-4`}>
+                  <f.icon className={`w-5 h-5 ${f.color}`} />
+                </div>
+                <h3 className="font-semibold text-base mb-2">{f.title}</h3>
+                <p className="text-sm text-muted-foreground leading-relaxed">{f.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      <div className="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 items-center gap-2">
-          <a
-            className="group flex flex-col justify-center hover:bg-gray-50 rounded-xl p-4 md:p-7 dark:hover:bg-neutral-800"
-            href="#"
-          >
-            <div className="flex justify-center items-center size-12 bg-blue-600 rounded-xl">
-              <svg
-                className="flex-shrink-0 size-6 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect width="10" height="14" x="3" y="8" rx="2" />
-                <path d="M5 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-2.4" />
-                <path d="M8 18h.01" />
-              </svg>
-            </div>
-            <div className="mt-5">
-              <h3 className="group-hover:text-gray-600 text-lg font-semibold text-gray-800 dark:text-white dark:group-hover:text-gray-400">
-                25+ templates
-              </h3>
-              <p className="mt-1 text-gray-600 dark:text-neutral-400">
-                Responsive, and mobile-first project on the web
+      {/* ── CTA ── */}
+      <section className="py-24 px-6">
+        <div className="max-w-2xl mx-auto text-center">
+          <div className="relative bg-gradient-to-br from-violet-600 to-indigo-600 rounded-3xl p-12 overflow-hidden">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_rgba(255,255,255,0.15),transparent_60%)]" />
+            <div className="relative">
+              <Star className="w-8 h-8 text-yellow-300 mx-auto mb-4" />
+              <h2 className="text-3xl font-bold text-white mb-3">
+                Ready to create amazing content?
+              </h2>
+              <p className="text-violet-200 mb-8 text-base">
+                Join thousands of creators using Handy AI every day.
               </p>
-              <span className="mt-2 inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 group-hover:underline font-medium">
-                Learn more
-                <svg
-                  className="flex-shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </span>
-            </div>
-          </a>
-
-          <a
-            className="group flex flex-col justify-center hover:bg-gray-50 rounded-xl p-4 md:p-7 dark:hover:bg-neutral-800"
-            href="#"
-          >
-            <div className="flex justify-center items-center size-12 bg-blue-600 rounded-xl">
-              <svg
-                className="flex-shrink-0 size-6 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+              <Link
+                href="/sign-up"
+                className="inline-flex items-center gap-2 bg-white text-violet-700 font-bold px-8 py-4 rounded-xl hover:bg-violet-50 transition-colors text-base"
               >
-                <path d="M20 7h-9" />
-                <path d="M14 17H5" />
-                <circle cx="17" cy="17" r="3" />
-                <circle cx="7" cy="7" r="3" />
-              </svg>
+                Get started free <ChevronRight className="w-4 h-4" />
+              </Link>
             </div>
-            <div className="mt-5">
-              <h3 className="group-hover:text-gray-600 text-lg font-semibold text-gray-800 dark:text-white dark:group-hover:text-gray-400">
-                Customizable
-              </h3>
-              <p className="mt-1 text-gray-600 dark:text-neutral-400">
-                Components are easily customized and extendable
-              </p>
-              <span className="mt-2 inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 group-hover:underline font-medium">
-                Learn more
-                <svg
-                  className="flex-shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </span>
-            </div>
-          </a>
-
-          <a
-            className="group flex flex-col justify-center hover:bg-gray-50 rounded-xl p-4 md:p-7 dark:hover:bg-neutral-800"
-            href="#"
-          >
-            <div className="flex justify-center items-center size-12 bg-blue-600 rounded-xl">
-              <svg
-                className="flex-shrink-0 size-6 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z" />
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z" />
-              </svg>
-            </div>
-            <div className="mt-5">
-              <h3 className="group-hover:text-gray-600 text-lg font-semibold text-gray-800 dark:text-white dark:group-hover:text-gray-400">
-                Free to Use
-              </h3>
-              <p className="mt-1 text-gray-600 dark:text-neutral-400">
-                Every component and plugin is well documented
-              </p>
-              <span className="mt-2 inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 group-hover:underline font-medium">
-                Learn more
-                <svg
-                  className="flex-shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </span>
-            </div>
-          </a>
-
-          <a
-            className="group flex flex-col justify-center hover:bg-gray-50 rounded-xl p-4 md:p-7 dark:hover:bg-neutral-800"
-            href="#"
-          >
-            <div className="flex justify-center items-center size-12 bg-blue-600 rounded-xl">
-              <svg
-                className="flex-shrink-0 size-6 text-white"
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path d="M14 9a2 2 0 0 1-2 2H6l-4 4V4c0-1.1.9-2 2-2h8a2 2 0 0 1 2 2v5Z" />
-                <path d="M18 9h2a2 2 0 0 1 2 2v11l-4-4h-6a2 2 0 0 1-2-2v-1" />
-              </svg>
-            </div>
-            <div className="mt-5">
-              <h3 className="group-hover:text-gray-600 text-lg font-semibold text-gray-800 dark:text-white dark:group-hover:text-gray-400">
-                24/7 Support
-              </h3>
-              <p className="mt-1 text-gray-600 dark:text-neutral-400">
-                Contact us 24 hours a day, 7 days a week
-              </p>
-              <span className="mt-2 inline-flex items-center gap-x-1.5 text-sm text-blue-600 decoration-2 group-hover:underline font-medium">
-                Learn more
-                <svg
-                  className="flex-shrink-0 size-4"
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <path d="m9 18 6-6-6-6" />
-                </svg>
-              </span>
-            </div>
-          </a>
+          </div>
         </div>
-      </div>
+      </section>
+
+      {/* ── Footer ── */}
+      <footer className="border-t border-border py-8 px-6">
+        <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-2">
+            <Image src="/logo.svg" alt="logo" width={24} height={24} />
+            <span className="font-semibold text-foreground">Handy AI</span>
+          </div>
+          <p>© 2025 Handy AI. Built by{" "}
+            <a href="https://www.linkedin.com/in/sahil-sheshank-203557255/" target="_blank" className="text-primary hover:underline font-medium">
+              Sahil Sheshank
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   );
 }

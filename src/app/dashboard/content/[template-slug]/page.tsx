@@ -63,21 +63,21 @@ function NewContent(props: PROPS) {
   };
 
   return (
-    <div className="p-7">
+    <div className="p-6">
       <Link href={"/dashboard"}>
-        <Button>
-          <ArrowLeft />
-          Back
+        <Button variant="ghost" className="mb-4 gap-2 text-muted-foreground hover:text-foreground rounded-xl">
+          <ArrowLeft className="w-4 h-4" />
+          Back to Templates
         </Button>
       </Link>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5 py-2 ">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
         <FormSectionComp
           loading={loading}
           selectedTemplate={selectedTemplate}
           userFormInput={(v: any) => generateAIContent(v)}
         />
         <div className="col-span-2">
-          <OutputSectionComp aiOutput={aiOutput} />
+          <OutputSectionComp aiOutput={aiOutput} loading={loading} />
         </div>
       </div>
     </div>

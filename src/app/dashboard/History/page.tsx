@@ -1,5 +1,4 @@
 import templates from "@/app/(data)/templates";
-import { Button } from "@/components/ui/button";
 import { db } from "../../../../utils/db";
 import { AiOutput } from "../../../../utils/schema";
 import { currentUser } from "@clerk/nextjs/server";
@@ -8,6 +7,7 @@ import Image from "next/image";
 import React from "react";
 import { TEMPLATE } from "../_components/TemplateList";
 import CopyButton from "./_components/CopyButton";
+import { FileClock, FileText } from "lucide-react";
 
 export interface HISTORY {
   formData: string | null;
@@ -18,8 +18,7 @@ export interface HISTORY {
 }
 
 async function History() {
-  const user = await currentUser(); // ✅ Fix: Await user
-  console.log("user", user);
+  const user = await currentUser();
   const userEmail =
     user?.emailAddresses?.find(
       (email) => email.id === user.primaryEmailAddressId
@@ -36,45 +35,92 @@ async function History() {
   };
 
   return (
-    <div className="m-5 p-5 border rounded-lg bg-white">
-      <h2 className="font-bold text-3xl">History</h2>
-      <p className="text-gray-500">
-        Search your previously generated AI content
-      </p>
-      <div className="grid grid-cols-7 font-bold bg-secondary mt-5 py-3 px-3">
-        <h2 className="col-span-2">TEMPLATE</h2>
-        <h2 className="col-span-2">AI RESP</h2>
-        <h2>DATE</h2>
-        <h2>WORDS</h2>
-        <h2>COPY</h2>
+    <div className="p-6 fade-in">
+      {/* Page header */}
+      <div className="flex items-center gap-3 mb-6">
+        <div className="p-2.5 bg-primary/10 rounded-xl border border-primary/20">
+          <FileClock className="w-5 h-5 text-primary" />
+        </div>
+        <div>
+          <h1 className="font-bold text-xl text-foreground">History</h1>
+          <p className="text-sm text-muted-foreground">Your previously generated content</p>
+        </div>
       </div>
-      {HistoryList.map((item: HISTORY, index: number) => (
-        <React.Fragment key={index}>
-          {" "}
-          {/* ✅ Fix: Add key to Fragment */}
-          <div className="grid grid-cols-7 my-5 py-3 px-3">
-            <h2 className="col-span-2 flex gap-2 items-center">
-              <Image
-                src={
-                  GetTemplateName(item?.templateSlug)?.icon ||
-                  "/default-icon.png"
-                } // ✅ Fix: Provide fallback image
-                width={25}
-                height={25}
-                alt="icon"
-              />
-              {GetTemplateName(item?.templateSlug)?.name}
-            </h2>
-            <h2 className="col-span-2 line-clamp-3 mr-3">{item?.aiResponse}</h2>
-            <h2>{item?.createdAt}</h2>
-            <h2>{item?.aiResponse?.length ?? 0}</h2>
-            <h2>
-              <CopyButton aiResponse={item.aiResponse ?? ""} />
-            </h2>
+
+      {HistoryList.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-24 text-muted-foreground bg-card border border-border rounded-2xl">
+          <div className="text-5xl mb-4">📭</div>
+          <p className="font-medium">No history yet</p>
+          <p className="text-sm mt-1">Generate some content to see it here</p>
+        </div>
+      ) : (
+        <div className="bg-card border border-border rounded-2xl overflow-hidden shadow-sm">
+          {/* Table header */}
+          <div className="grid grid-cols-7 text-xs font-semibold uppercase tracking-wide text-muted-foreground bg-muted/50 px-6 py-3 border-b border-border">
+            <div className="col-span-2">Template</div>
+            <div className="col-span-2">AI Response</div>
+            <div>Date</div>
+            <div>Words</div>
+            <div>Copy</div>
           </div>
-          <hr />
-        </React.Fragment>
-      ))}
+
+          {/* Rows */}
+          <div className="divide-y divide-border">
+            {HistoryList.map((item: HISTORY, index: number) => {
+              const template = GetTemplateName(item?.templateSlug)
+              return (
+                <div
+                  key={index}
+                  className="grid grid-cols-7 px-6 py-4 items-center hover:bg-muted/30 transition-colors"
+                >
+                  {/* Template */}
+                  <div className="col-span-2 flex items-center gap-3">
+                    {template?.icon ? (
+                      <div className="p-1.5 bg-muted rounded-lg border border-border flex-shrink-0">
+                        <Image
+                          src={template.icon}
+                          width={20}
+                          height={20}
+                          alt="icon"
+                        />
+                      </div>
+                    ) : (
+                      <div className="p-1.5 bg-muted rounded-lg border border-border flex-shrink-0">
+                        <FileText className="w-4 h-4 text-muted-foreground" />
+                      </div>
+                    )}
+                    <span className="text-sm font-medium truncate">
+                      {template?.name ?? item.templateSlug ?? '—'}
+                    </span>
+                  </div>
+
+                  {/* AI Response preview */}
+                  <div className="col-span-2 pr-4">
+                    <p className="text-sm text-muted-foreground line-clamp-2 leading-relaxed">
+                      {item?.aiResponse ?? '—'}
+                    </p>
+                  </div>
+
+                  {/* Date */}
+                  <div className="text-sm text-muted-foreground">{item?.createdAt ?? '—'}</div>
+
+                  {/* Word count */}
+                  <div>
+                    <span className="text-xs font-semibold bg-primary/10 text-primary px-2 py-1 rounded-lg">
+                      {item?.aiResponse?.split(/\s+/).filter(Boolean).length ?? 0} words
+                    </span>
+                  </div>
+
+                  {/* Copy */}
+                  <div>
+                    <CopyButton aiResponse={item.aiResponse ?? ""} />
+                  </div>
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

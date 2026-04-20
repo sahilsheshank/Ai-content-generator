@@ -1,13 +1,14 @@
 import type { Metadata } from "next";
-import { Inter,Outfit } from "next/font/google";
+import { Outfit } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
+import { ThemeProvider } from "@/components/theme-provider";
 
-const inter = Outfit({ subsets: ["latin"] });
+const outfit = Outfit({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "CreatorAI",
-  description: "AI Content Generator",
+  title: "Handy AI — AI Content Generator",
+  description: "Generate high-quality AI content in seconds with 25+ templates",
 };
 
 export default function RootLayout({
@@ -17,10 +18,18 @@ export default function RootLayout({
 }>) {
   return (
     <ClerkProvider>
-    <html lang="en">
-      <body className={inter.className}>{children}</body>
-      
-    </html>
+      <html lang="en" suppressHydrationWarning>
+        <body className={outfit.className}>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
     </ClerkProvider>
   );
 }
