@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, Sparkles, Zap, Shield, Clock, Star, ChevronRight } from "lucide-react";
+import { currentUser } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 const features = [
   {
@@ -40,7 +42,9 @@ const stats = [
   { value: "Free", label: "To Start" },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const user = await currentUser();
+  if (user) redirect("/dashboard");
   return (
     <div className="min-h-screen bg-background text-foreground">
       {/* ── Navbar ── */}
