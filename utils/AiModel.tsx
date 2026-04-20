@@ -5,8 +5,7 @@ const apiKey = process.env.NEXT_PUBLIC_GOOGLE_GEMINI_API_KEY as string;
 const genAI = new GoogleGenerativeAI(apiKey);
 
 const model = genAI.getGenerativeModel(
-  { model: "gemini-2.0-flash" },
-  { apiVersion: "v1beta" }
+  { model: "gemini-1.5-flash" }
 );
 
 const generationConfig = {
