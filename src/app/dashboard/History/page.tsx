@@ -11,10 +11,10 @@ import CopyButton from "./_components/CopyButton";
 
 export interface HISTORY {
   formData: string | null;
-  aiResponse: string;
-  templateSlug: string;
-  createdBy: string;
-  createdAt: string;
+  aiResponse: string | null;
+  templateSlug: string | null;
+  createdBy: string | null;
+  createdAt: string | null;
 }
 
 async function History() {
@@ -31,8 +31,8 @@ async function History() {
     .where(eq(AiOutput?.createdBy, userEmail))
     .orderBy(desc(AiOutput.id));
 
-  const GetTemplateName = (slug: string) => {
-    return templates?.find((item) => item.slug === slug) || {}; // ✅ Fix: Avoid undefined error
+  const GetTemplateName = (slug: string | null): TEMPLATE | undefined => {
+    return templates?.find((item) => item.slug === slug);
   };
 
   return (
@@ -67,9 +67,9 @@ async function History() {
             </h2>
             <h2 className="col-span-2 line-clamp-3 mr-3">{item?.aiResponse}</h2>
             <h2>{item?.createdAt}</h2>
-            <h2>{item?.aiResponse.length}</h2>
+            <h2>{item?.aiResponse?.length ?? 0}</h2>
             <h2>
-              <CopyButton aiResponse={item.aiResponse} />
+              <CopyButton aiResponse={item.aiResponse ?? ""} />
             </h2>
           </div>
           <hr />
